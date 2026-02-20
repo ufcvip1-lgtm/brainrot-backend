@@ -48,3 +48,17 @@ app.get("/test", async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log("Server started"));
+app.use((req, res, next) => {
+  console.log(`➡️ INCOMING: ${req.method} ${req.originalUrl}`);
+  next();
+});
+
+app.post(
+  ["/webhook/cryptopay/:secret", "/webhook/cryptopay/:secret/"],
+  express.json({ type: "*/*" }),
+  (req, res) => {
+    console.log("✅ SECRET:", req.params.secret);
+    console.log("✅ BODY:", req.body);
+    return res.sendStatus(200);
+  }
+);
