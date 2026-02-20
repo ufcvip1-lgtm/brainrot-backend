@@ -5,7 +5,7 @@ const app = express();
 app.use(express.json());
 
 const TOKEN = process.env.CRYPTO_PAY_TOKEN;
-const API_BASE = "https://pay.crypt.bot/api";
+const API_BASE = process.env.CRYPTO_PAY_API_BASE;
 
 app.get("/", (req, res) => {
   res.send("SERVER WORKING");
